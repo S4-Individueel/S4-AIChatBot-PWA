@@ -27,8 +27,6 @@ export default async function handler(
 		return new Response("Please send your prompt", {status: 400});
 	}
 
-	console.log(prompt)
-
 	const aiResult = await openapi.createCompletion({
 		model: "text-davinci-003",
 		prompt: `${prompt}`,
@@ -37,8 +35,6 @@ export default async function handler(
 		frequency_penalty: 0.5,
 		presence_penalty: 0
 	})
-
-	console.log(aiResult)
 
 	const response = aiResult.data.choices[0].text?.trim() || "Sorry there was a problem!";
 	res.status(200).json({text: response})
